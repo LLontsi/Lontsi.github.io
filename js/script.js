@@ -97,23 +97,6 @@ selectItems.forEach(item => {
     });
   });
 });
-// Sélectionnez l'élément de sélection
-const select = document.querySelector("[data-select]");
-//const filterItems = document.querySelectorAll("[data-filter-item]");
-
-// Ajoutez un écouteur d'événement pour détecter les changements de sélection
-select.addEventListener("change", function () {
-  // Obtenez la valeur sélectionnée
-  const selectedValue = this.value;
-  // Filtrez les éléments en fonction de la catégorie sélectionnée
-  filterItems.forEach(item => {
-    if (selectedValue === "all" || selectedValue === item.dataset.category.toLowerCase()) {
-      item.style.display = "block"; // Affichez l'élément si la catégorie correspond ou si "all" est sélectionné
-    } else {
-      item.style.display = "none"; // Masquez l'élément s'il ne correspond pas à la catégorie sélectionnée
-    }
-  });
-});
 
 // Variables de formulaire de contact
 const form = document.querySelector("[data-form]");
