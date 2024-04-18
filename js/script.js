@@ -48,62 +48,55 @@ modalCloseBtn.addEventListener("click", testimonialsModalFunc);
 overlay.addEventListener("click", testimonialsModalFunc);
 
 // Variables de sélection personnalisée
-const select = document.querySelector("[data-select]");
-const selectItems = document.querySelectorAll("[data-select-item]");
-const selectValue = document.querySelector("[data-selecct-value]");
-const filterBtn = document.querySelectorAll("[data-filter-btn]");
 
-select.addEventListener("click", function () { elementToggleFunc(this); });
 
-// Ajouter un événement à tous les éléments de sélection
-for (let i = 0; i < selectItems.length; i++) {
-  selectItems[i].addEventListener("click", function () {
+// Sélectionnez les éléments nécessaires
+const filterBtns = document.querySelectorAll("[data-filter-btn]"); // Boutons de filtrage
+const selectItems = document.querySelectorAll("[data-select-item]"); // Éléments de sélection
+const filterItems = document.querySelectorAll("[data-filter-item]"); // Éléments à filtrer
+const selectValue = document.querySelector("[data-selecct-value]"); // Élément d'affichage de la valeur sélectionnée
 
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    elementToggleFunc(select);
-    filterFunc(selectedValue);
-
-  });
-}
-
-// Fonction de filtre
-const filterItems = document.querySelectorAll("[data-filter-item]");
-
-const filterFunc = function (selectedValue) {
-
-  for (let i = 0; i < filterItems.length; i++) {
-
-    if (selectedValue === "all") {
-      filterItems[i].classList.add("active");
-    } else if (selectedValue === filterItems[i].dataset.category) {
-      filterItems[i].classList.add("active");
-    } else {
-      filterItems[i].classList.remove("active");
-    }
-
-  }
-
-}
-
-// Ajouter un événement à tous les boutons de filtre pour les grands écrans
-let lastClickedBtn = filterBtn[0];
-
-for (let i = 0; i < filterBtn.length; i++) {
-
-  filterBtn[i].addEventListener("click", function () {
-
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    filterFunc(selectedValue);
-
-    lastClickedBtn.classList.remove("active");
+// Ajoutez un écouteur d'événement à chaque bouton de filtrage
+filterBtns.forEach(btn => {
+  btn.addEventListener("click", function () {
+    // Supprimez la classe "active" de tous les boutons de filtrage
+    filterBtns.forEach(button => {
+      button.classList.remove("active");
+    });
+    // Ajoutez la classe "active" au bouton de filtrage actuel
     this.classList.add("active");
-    lastClickedBtn = this;
-
+    // Mettez à jour la valeur affichée dans le sélecteur avec celle du bouton de filtrage actuel
+    selectValue.innerText = this.innerText;
+    // Obtenez la catégorie sélectionnée
+    const selectedCategory = this.innerText.toLowerCase();
+    // Filtrez les éléments en fonction de la catégorie sélectionnée
+    filterItems.forEach(item => {
+      if (selectedCategory === "all" || selectedCategory === item.dataset.category.toLowerCase()) {
+        item.style.display = "block"; // Affichez l'élément si la catégorie correspond ou si "all" est sélectionné
+      } else {
+        item.style.display = "none"; // Masquez l'élément s'il ne correspond pas à la catégorie sélectionnée
+      }
+    });
   });
+});
 
-}
+// Ajoutez un écouteur d'événement à chaque élément de sélection
+selectItems.forEach(item => {
+  item.addEventListener("click", function () {
+    // Mettez à jour la valeur affichée dans le sélecteur avec celle de l'élément de sélection actuel
+    selectValue.innerText = this.innerText;
+    // Obtenez la catégorie sélectionnée
+    const selectedCategory = this.innerText.toLowerCase();
+    // Filtrez les éléments en fonction de la catégorie sélectionnée
+    filterItems.forEach(item => {
+      if (selectedCategory === "all" || selectedCategory === item.dataset.category.toLowerCase()) {
+        item.style.display = "block"; // Affichez l'élément si la catégorie correspond ou si "all" est sélectionné
+      } else {
+        item.style.display = "none"; // Masquez l'élément s'il ne correspond pas à la catégorie sélectionnée
+      }
+    });
+  });
+});
 
 // Variables de formulaire de contact
 const form = document.querySelector("[data-form]");
