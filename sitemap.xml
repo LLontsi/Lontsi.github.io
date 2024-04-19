@@ -1,1 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">  <url>    <loc>https://Lontsi.github.io/</loc>    <changefreq>daily</changefreq>  </url></urlset>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://LLontsi.github.io/</loc>
+        <lastmod>2024-04-18</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <!-- Ajoutez d'autres URL ici -->
+</urlset>
